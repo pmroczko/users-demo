@@ -1,0 +1,20 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+.user-search-container {
+  width: 200px;
+  display: block;
+  margin: auto;
+}
+.user-container {
+  width: 200px;
+  display: block;
+  margin: auto;
+}
+.user-name {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.grayed-out {
+  color: darkgrey;
+}
