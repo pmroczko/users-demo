@@ -3,35 +3,28 @@ import React, { useEffect, useState, useRef } from "react";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+
   useEffect(() => {
-    const demoData = [
-      {
-        id: 1,
-        name: "John Doe",
-        tag: "John",
+    fetch("https://jsonplaceholder.typicode.com/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        id: 2,
-        name: "Henry Ford",
-        tag: "Henry",
-      },
-      {
-        id: 3,
-        name: "Jane Smith",
-        tag: "Jane",
-      },
-    ];
-    setUsers(demoData);
-    setFilteredUsers(demoData);
+    })
+      .then((results) => results.json())
+      .then((users) => {
+        setUsers(users);
+        setFilteredUsers(users);
+      });
   }, []);
   const searchText = useRef("");
 
   const onChange = (e) => {
-    const filterText = e.target.value;
+    const filterText = e.target.value.toLowerCase();
     const filteredUsers = users.filter((u) => {
-      const isName = u.name !== undefined && u.name.indexOf(filterText) > -1;
-      const isTag = u.tag !== undefined && u.tag.indexOf(filterText) > -1;
-      return isName || isTag;
+      return (
+        u.name !== undefined && u.name.toLowerCase().indexOf(filterText) > -1
+      );
     });
     setFilteredUsers(filteredUsers);
   };
@@ -59,7 +52,7 @@ const Users = () => {
             <li className='left-align' key={u.id}>
               <span className='grayed-out'>{u.id}</span>
               <span className='user-name'> {u.name}</span>
-              <span className='grayed-out'> @{u.tag}</span>
+              <span className='grayed-out'> @{u.username}</span>
             </li>
           ))}
         </ul>
