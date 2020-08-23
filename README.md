@@ -5,9 +5,9 @@ This is simple React application made for recrutation purposes.
 ## How to run
 
 Just run
-...
+```
 npm start
-...
+```
 
 ## My thoughts
 
